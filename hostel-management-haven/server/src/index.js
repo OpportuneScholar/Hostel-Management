@@ -19,5 +19,5 @@ if (existsSync(clientDist)) {
   app.use(express.static(clientDist));
   app.get('/{*path}', (req, res) => { res.set('Cache-Control', 'no-cache'); res.sendFile(`${clientDist}/index.html`); });
 }
-const server = app.listen(Number(process.env.PORT || 3001), process.env.HOST || '127.0.0.1', () => console.log('Haven API ready'));
+const server = app.listen(Number(process.env.PORT || 3001),'0.0.0.0', () => console.log('Haven API ready'));
 for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close(async () => { await mongoose.disconnect(); process.exit(0); }));
